@@ -2,7 +2,7 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 // discord BOTトークンの用意
-const token = 'OTQ1MjMzMTQ5MTQxNTgxODM1.YhNK-A.xbc2WmMeebY5fNHPputCOm_YfKU';
+const token = 'OTQ1MjMzMTQ5MTQxNTgxODM1.YhNK-A.EN-JJqpomA4UvSjBHlXfwhxVHpY';
 
 // discord　ログイン時ログ
 client.on('ready', () => {

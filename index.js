@@ -12,6 +12,8 @@ client.on('ready', () => {
 client.on ('messageCreate', (message) => {
     if(message.author.bot) return;
 
+    const random = Math.floor( Math.random() * 50 );
+
     if (message.content === 'hello') {
         message.channel.send("HELLO!")
     };
@@ -19,6 +21,10 @@ client.on ('messageCreate', (message) => {
         message.channel.send('やんのか？')
     };
     if (message.content === 'やんのか？') {
+        message.channel.send('は？')
+    };
+
+    if (message.content && random === 0){
         message.channel.send('は？')
     };
 });

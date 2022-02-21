@@ -16,10 +16,10 @@ client.on ('messageCreate', (message) => {
         message.channel.send("HELLO!")
     };
     if (message.content === 'は？') {
-        message.reply('やんのか？')
+        message.channel.send('やんのか？')
     };
     if (message.content === 'やんのか？') {
-        message.reply('は？')
+        message.channel.send('は？')
     };
 });
 

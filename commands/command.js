@@ -44,14 +44,14 @@ function command(client) {
             const res = await message.channel.awaitMessages({ filter, max: 1, time: 10000 })
             const responce = res.first()
             if (!responce) return message.channel.send('タイムアウト')
-            //3秒後に結果を表示
+            //5秒後に結果を表示
             if(responce.content === 'start'){
                 let random = Math.floor(Math.random() * rouletArray.length);
                 let result = rouletArray[random];
                 message.channel.sendTyping();
                 setTimeout(() => {
                     message.channel.send(result + ' が選ばれました！！')
-                }, 3000)
+                }, 5000)
             } else if(responce.content === 'quit'){
                 message.channel.send('やっぱやめました');
             } else {

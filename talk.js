@@ -4,25 +4,33 @@ function talk(client) {
         if(message.author.bot) return;
     
         const random = Math.floor( Math.random() * 60 );
+        const ran2 = Math.floor( Math.random() * 2 );
     
-        if (message.content === 'hello') {
-            message.channel.send("HELLO!")
+        if (message.content === 'おはよう') {
+            message.channel.send("ｵﾊﾖｳｺﾞｻﾞｲﾏｽ")
         };
         if (message.content === 'は？') {
             message.channel.send('やんのか？')
         };
         if (message.content === 'やんのか？') {
-            message.channel.send('は？')
+            if(ran2){
+                message.channel.send('お？いいぞかかってこいよ')
+            } else {
+                message.channel.send('は？')
+            }
         };
-        if (message.content && random === 0){
-            message.channel.send('は？')
-        };
-        if (message.content && random === 1){
-            message.channel.send('それはそう')
-        };
-        if (message.content && random === 2){
-            message.channel.send('たしかに')
-        };
+        //以下は!コマンド、特定のコマンド実行中に動作しない
+        // if(!message.content.startsWith('!')){
+        //     if (message.content && random === 0){
+        //         message.channel.send('は？')
+        //     };
+        //     if (message.content && random === 1){
+        //         message.channel.send('それはそう')
+        //     };
+        //     if (message.content && random === 2){
+        //         message.channel.send('たしかに')
+        //     };
+        // }
     });
 }
 

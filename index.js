@@ -17,17 +17,17 @@ client.on ('messageCreate', (message) => {
     const random = Math.floor( Math.random() * 50 );
 
     if (message.content === 'hello') {
-        message.channel.send("HELLO!")
+        message.channel.sendTyping("HELLO!")
     };
     if (message.content === 'は？') {
-        message.channel.send('やんのか？')
+        message.channel.sendTyping('やんのか？')
     };
     if (message.content === 'やんのか？') {
-        message.channel.send('は？')
+        message.channel.sendTyping('は？')
     };
 
     if (message.content && random === 0){
-        message.channel.send('は？')
+        message.channel.sendTyping('は？')
     };
 });
 

@@ -5,19 +5,23 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 const talk = require('./talk.js');
 const timeMessage = require('./timeMessage.js');
+const commands = require('./commands/command.js');
 
 // discord BOTトークン 環境変数から取得
 require('dotenv').config();
 let token = process.env.TOKEN;
 
-// discord　ログイン時ログ
-client.on('ready', () => {
+// discord BOT 起動時
+client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity('PO!')
+    client.user.setActivity('!help');
 });
 
+//コマンド処理
+commands(client);
+
 //定時処理
-timeMessage();
+timeMessage(client);
 
 //特定のメッセージに反応
 talk(client);

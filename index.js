@@ -9,6 +9,7 @@ let token = process.env.TOKEN;
 // discord　ログイン時ログ
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setActivity('PO!')
 });
 
 client.on ('messageCreate', (message) => {

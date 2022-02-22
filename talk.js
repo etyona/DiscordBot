@@ -14,7 +14,7 @@ function talk(client) {
         };
         if (message.content === 'やんのか？') {
             if(ran2){
-                message.channel.send('お？いいぞかかってこいよ')
+                message.channel.send('お？いいぞかかってこい')
             } else {
                 message.channel.send('は？')
             }

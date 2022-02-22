@@ -1,7 +1,7 @@
 //コマンドメイン処理
 
 //コマンド名一覧 !help で使用
-cmdArray = ['add A B', 'roulet'];
+cmdArray = ['add A B', 'roulet', 'team'];
 
 const prefix = '!'
 function command(client) {
@@ -20,28 +20,28 @@ function command(client) {
             message.channel.send(`${a} + ${b} = ${a + b}`)
         }
         if (command === 'roulet') {
-            message.channel.send('要素の数を入力してください')
+            message.channel.send('入力した数の要素を持つルーレットを作成します')
             const filter = msg => msg.author.id === message.author.id
-            //10秒でタイムアウト
-            const collected = await message.channel.awaitMessages({ filter, max: 1, time: 10000 })
+            //30秒でタイムアウト
+            const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
             const rouletNum = collected.first()
             if (!rouletNum) return message.channel.send('タイムアウト')
-            message.channel.send(`${rouletNum.content}の要素を持つルーレットを作成します`)
             //指定した数の要素を入力
             const rouletArray = [];
             for (let index = 0; index < rouletNum.content; index++) {
-                message.channel.send(index+1 + 'つ目の要素を入力してください')
-                const element = await message.channel.awaitMessages({ filter, max: 1, time: 10000 })
+                const order = await message.channel.send(index+1+'/'+rouletNum.content+'の要素を入力してください')
+                const element = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
                 const responce = element.first()
                 if (!responce) return message.channel.send('タイムアウト')
                 rouletArray.push(responce.content)
+                order.delete()
             }
             //入力した要素を一覧にして表示
-            rouletArray.forEach(str => {
-                message.channel.send(str+'\n')
-            }); 
+            // rouletArray.forEach(str => {
+            //     message.channel.send(str+'\n')
+            // }); 
             message.channel.send('回す/start  やめる/quit')
-            const res = await message.channel.awaitMessages({ filter, max: 1, time: 10000 })
+            const res = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
             const responce = res.first()
             if (!responce) return message.channel.send('タイムアウト')
             //5秒後に結果を表示

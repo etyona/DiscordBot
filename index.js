@@ -1,11 +1,13 @@
+const cron = require('node-cron');
+
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const cron = require('node-cron');
+
+const talk = require('./talk.js');
 
 // discord BOTトークン 環境変数から取得
 require('dotenv').config();
 let token = process.env.TOKEN;
-
 
 // discord　ログイン時ログ
 client.on('ready', () => {
@@ -14,63 +16,51 @@ client.on('ready', () => {
 });
 
 //定時処理
-cron.schedule('30 * * * *', () => {
+cron.schedule('0 0 * * *', () => {
     const random = Math.floor( Math.random() * 10 );
 
     switch (random) {
         case 1:
-            console.log('良い子は寝る時間ですよ');
+            message.channel.sendTyping('良い子は寝る時間ですよ');
             break;
         case 2:
-            console.log('ぴゃああああああああ！');
+            message.channel.sendTyping('ぴゃああああああああ！');
             break;
         case 3:
-            console.log('おやすみなさい');
+            message.channel.sendTyping('おやすみなさい');
             break;
         case 4:
-            console.log('日付変わったってマ？');
+            message.channel.sendTyping('日付変わったってマ？');
             break;
         case 5:
-            console.log('Zzz...');
+            message.channel.sendTyping('Zzz...');
             break;
         case 6:
-            console.log('マンボ！');
+            message.channel.sendTyping('マンボ！');
             break;
         case 7:
-            console.log('あくてぃが24時をお知らせします。');
+            message.channel.sendTyping('あくてぃが24時をお知らせします。');
             break;
         case 8:
-            console.log('日付が変わりました。');
+            message.channel.sendTyping('日付が変わりました。');
             break;
         case 9:
-            console.log('寝ろ');
+            message.channel.sendTyping('寝ろ');
             break;
         default:
-            console.log('おやすみ');
+            message.channel.sendTyping('おやすみ');
             break;
     }
 })
 
 //特定のメッセージに反応
-client.on ('messageCreate', (message) => {
-    if(message.author.bot) return;
+talk(client);
 
-    const random = Math.floor( Math.random() * 50 );
-
-    if (message.content === 'hello') {
-        message.channel.sendTyping("HELLO!")
-    };
-    if (message.content === 'は？') {
-        message.channel.sendTyping('やんのか？')
-    };
-    if (message.content === 'やんのか？') {
-        message.channel.sendTyping('は？')
-    };
-
-    if (message.content && random === 0){
-        message.channel.sendTyping('は？')
-    };
-});
+// client.on('typingStart', typing => {
+//     if (typing.channel.id !== 'タイピング表示を検知するチャンネルID') return
+//     const target = client.channels.resolve('タイピング表示を出すチャンネルID')
+//     target.sendTyping()
+// })
 
 // Discordへの接続
 client.login(token);

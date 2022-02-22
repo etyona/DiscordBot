@@ -4,13 +4,14 @@ cmdArray = ['add A B','prompt'];
 const prefix = '!'
 function command(client) {
     client.on('message', async message => {
-        if (!message.content.startsWith(prefix)) return
+        if (!message.content.startsWith(prefix) || message.author.bot) return
         const [command, ...args] = message.content.slice(prefix.length).split(' ')
         if (command === 'help') {
             message.channel.send('現在使用可能なコマンド')
             cmdArray.forEach(cmdName => {
-                message.channel.send(cmdName+'\n')
-            });
+                message.channel.send('!' + cmdName+'\n')
+            }); 
+            return
         }
         if (command === 'add') {
             const [a, b] = args.map(str => Number(str))

@@ -22,9 +22,10 @@ function command(client) {
         if (command === 'roulet') {
             message.channel.send('入力した数の要素を持つルーレットを作成します  やめる/quit')
             const filter = msg => msg.author.id === message.author.id
-            //30秒でタイムアウト
+            //30秒でタイムアウト 要素数の入力
             const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
             const rouletNum = collected.first()
+            message.delete()
             if (!rouletNum) return message.channel.send('タイムアウト')
             if (isNaN(parseInt(rouletNum))) {
                 message.channel.send('不正な入力を検知したのでやめます')
@@ -37,7 +38,10 @@ function command(client) {
                 const element = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
                 const responce = element.first()
                 if (!responce) return message.channel.send('タイムアウト')
-                if (responce === 'quit') {message.channel.send('やっぱやめました')}
+                if (responce.content === 'quit') {
+                    message.channel.send('やっぱやめました')
+                    return
+                }
                 rouletArray.push(responce.content)
                 order.delete()
             }

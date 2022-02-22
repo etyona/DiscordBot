@@ -6,22 +6,22 @@ function talk(client) {
         const random = Math.floor( Math.random() * 60 );
     
         if (message.content === 'hello') {
-            message.channel.sendTyping("HELLO!")
+            message.channel.send("HELLO!")
         };
         if (message.content === 'は？') {
-            message.channel.sendTyping('やんのか？')
+            message.channel.send('やんのか？')
         };
         if (message.content === 'やんのか？') {
-            message.channel.sendTyping('は？')
+            message.channel.send('は？')
         };
         if (message.content && random === 0){
-            message.channel.sendTyping('は？')
+            message.channel.send('は？')
         };
         if (message.content && random === 1){
-            message.channel.sendTyping('それはそう')
+            message.channel.send('それはそう')
         };
         if (message.content && random === 2){
-            message.channel.sendTyping('たしかに')
+            message.channel.send('たしかに')
         };
     });
 }

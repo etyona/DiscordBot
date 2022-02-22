@@ -20,13 +20,13 @@ function command(client) {
             message.channel.send(`${a} + ${b} = ${a + b}`)
         }
         if (command === 'roulet') {
-            message.channel.send('入力した数の要素を持つルーレットを作成します')
+            message.channel.send('入力した数の要素を持つルーレットを作成します  やめる/quit')
             const filter = msg => msg.author.id === message.author.id
             //30秒でタイムアウト
             const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
             const rouletNum = collected.first()
             if (!rouletNum) return message.channel.send('タイムアウト')
-            if (!isNaN(rouletNum)) {
+            if (isNaN(parseInt(rouletNum))) {
                 message.channel.send('不正な入力を検知したのでやめます')
                 return
             }
@@ -37,6 +37,7 @@ function command(client) {
                 const element = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
                 const responce = element.first()
                 if (!responce) return message.channel.send('タイムアウト')
+                if (responce === 'quit') {message.channel.send('やっぱやめました')}
                 rouletArray.push(responce.content)
                 order.delete()
             }
@@ -54,7 +55,7 @@ function command(client) {
                     message.channel.send(result + ' が選ばれました！！')
                 }, 5000)
             } else if(responce.content === 'quit'){
-                message.channel.send('やっぱやめました');
+                message.channel.send('やっぱやめました')
             } else {
                 message.channel.send('不正な入力を検知したのでやめます')
             }

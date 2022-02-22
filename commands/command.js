@@ -26,6 +26,10 @@ function command(client) {
             const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
             const rouletNum = collected.first()
             if (!rouletNum) return message.channel.send('タイムアウト')
+            if (!isNaN(rouletNum)) {
+                message.channel.send('不正な入力を検知したのでやめます')
+                return
+            }
             //指定した数の要素を入力
             const rouletArray = [];
             for (let index = 0; index < rouletNum.content; index++) {
@@ -36,14 +40,11 @@ function command(client) {
                 rouletArray.push(responce.content)
                 order.delete()
             }
-            //入力した要素を一覧にして表示
-            // rouletArray.forEach(str => {
-            //     message.channel.send(str+'\n')
-            // }); 
-            message.channel.send('回す/start  やめる/quit')
+            const start = await message.channel.send('回す/start  やめる/quit')
             const res = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
             const responce = res.first()
             if (!responce) return message.channel.send('タイムアウト')
+            start.delete()
             //5秒後に結果を表示
             if(responce.content === 'start'){
                 let random = Math.floor(Math.random() * rouletArray.length);

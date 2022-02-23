@@ -1,8 +1,7 @@
-//コマンドメイン処理
-
 //コマンド名一覧 !help で使用
 cmdArray = ['roulet', 'yts'];
 
+//コマンドメイン処理
 const prefix = '!'
 function command(client) {
     client.on('message', async message => {
@@ -23,16 +22,17 @@ function command(client) {
             const [text] = args
             //引数が無ければ入力させる
             if(!text){
-                message.channel.send('何を検索しますか？ やめる/quit')
-                const filter = msg => msg.author.id === message.author.id
-                const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
-                const text = collected.first()
-                if(text === 'quit'){return}
+                message.channel.send('引数を入力してください')
             }
             const yts = require('yt-search')
             yts(text, function (err, r) {
                 const videos = r.videos
-                message.channel.send(videos[ 0 ].url )
+                const channels = r.channels
+                const views = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(videos[0].views))
+                const subCount = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(channels[0].subCount))
+                message.channel.send(videos[0].url)
+                message.channel.send(views+' 回視聴')
+                message.channel.send(subCount+'登録者')
             })
         }
         if (command === 'roulet') {

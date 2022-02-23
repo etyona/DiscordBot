@@ -24,6 +24,7 @@ function command(client) {
             //引数が無ければ入力させる
             if(!text){
                 message.channel.send('何を検索しますか？ やめる/quit')
+                const filter = msg => msg.author.id === message.author.id
                 const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
                 const text = collected.first()
                 if(text === 'quit'){return}

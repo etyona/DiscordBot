@@ -19,18 +19,6 @@ function talk(client) {
                 message.channel.send('は？')
             }
         };
-        //以下は!コマンド、特定のコマンド実行中に動作しない
-        // if(!message.content.startsWith('!')){
-        //     if (message.content && random === 0){
-        //         message.channel.send('は？')
-        //     };
-        //     if (message.content && random === 1){
-        //         message.channel.send('それはそう')
-        //     };
-        //     if (message.content && random === 2){
-        //         message.channel.send('たしかに')
-        //     };
-        // }
     });
 }
 

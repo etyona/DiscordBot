@@ -1,5 +1,5 @@
 //コマンド名一覧 !help で使用
-cmdArray = ['roulet', 'yts'];
+cmdArray = ['roulet', 'yts A'];
 
 //コマンドメイン処理
 const prefix = '!'
@@ -7,6 +7,7 @@ function command(client) {
     client.on('message', async message => {
         if (!message.content.startsWith(prefix) || message.author.bot) return
         const [command, ...args] = message.content.slice(prefix.length).split(' ')
+        //!help 
         if (command === 'help') {
             message.channel.send('現在使用可能なコマンド')
             cmdArray.forEach(cmdName => {
@@ -18,22 +19,21 @@ function command(client) {
             const [a, b] = args.map(str => Number(str))
             message.channel.send(`${a} + ${b} = ${a + b}`)
         }
+        //!yts 引数 
+        //Youtube検索　検索結果のトップ動画のURLと視聴回数、登録者を表示
         if (command === 'yts'){
             const [text] = args
+            message.channel.sendTyping()
             if(!text){
-                message.channel.send('引数を入力してください')
+                message.channel.send('引数がありません')
                 return
             }
-            message.channel.sendTyping()
             const yts = require('yt-search')
+            //検索内容によってチャンネル情報が取得できないため、2回検索を行う
             yts(text, function (err, r) {
-                if(!r) {
-                    message.channel.send('検索に失敗しました')
-                    return
-                }
                 const video = r.videos[0]
-                const channelName = r.videos[0].author.name
-                //1つ目の動画のチャンネル名で検索
+                const channelName = r.videos[0].author.name //動画のチャンネル名
+                //動画のチャンネル名で検索、チャンネル情報を取得
                 yts(channelName, function (err, c){
                     const views = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(video.views))
                     const subCount = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(c.channels[0].subCount))

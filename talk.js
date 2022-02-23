@@ -12,6 +12,10 @@ function talk(client) {
         if (message.content === 'は？') {
             message.channel.send('やんのか？')
         };
+        //メンションに反応
+        if (!message.mentions.members.size == 0) {
+            message.channel.send('あくしろよ')
+        }
         if (message.content === 'やんのか？') {
             if(ran2){
                 message.channel.send('お？いいぞかかってこい')

@@ -63,29 +63,29 @@ function command(client) {
             for (let index = 0; index < rouletNum.content; index++) {
                 const order = await message.channel.send(index+1+'/'+rouletNum.content+'の要素を入力してください')
                 const element = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
-                const responce = element.first()
-                if (!responce) return message.channel.send('タイムアウト')
-                if (responce.content === 'quit') {
+                const response = element.first()
+                if (!response) return message.channel.send('タイムアウト')
+                if (response.content === 'quit') {
                     message.channel.send('やっぱやめました')
                     return
                 }
-                rouletArray.push(responce.content)
+                rouletArray.push(response.content)
                 order.delete()
             }
             const start = await message.channel.send('回す/start  やめる/quit')
             const res = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
-            const responce = res.first()
-            if (!responce) return message.channel.send('タイムアウト')
+            const response = res.first()
+            if (!response) return message.channel.send('タイムアウト')
             start.delete()
             //5秒後に結果を表示
-            if(responce.content === 'start'){
+            if(response.content === 'start'){
                 let random = Math.floor(Math.random() * rouletArray.length);
                 let result = rouletArray[random];
                 message.channel.sendTyping();
                 setTimeout(() => {
                     message.channel.send(result + ' が選ばれました！！')
                 }, 5000)
-            } else if(responce.content === 'quit'){
+            } else if(response.content === 'quit'){
                 message.channel.send('やっぱやめました')
             } else {
                 message.channel.send('不正な入力を検知したのでやめます')

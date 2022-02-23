@@ -1,5 +1,5 @@
 //コマンド名一覧 !help で使用
-cmdArray = ['roulet', 'yts A'];
+cmdArray = ['github', 'roulet', 'yts A'];
 
 //コマンドメイン処理
 const prefix = '!'
@@ -14,6 +14,9 @@ function command(client) {
                 message.channel.send('!'+cmdName+'\n')
             }); 
             return
+        }
+        if (command === 'github') {
+            message.channel.send('https://github.com/etyona/DiscordBot')
         }
         if (command === 'add') {
             const [a, b] = args.map(str => Number(str))

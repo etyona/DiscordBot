@@ -2,7 +2,6 @@ const cron = require('node-cron');
 const channelid = '475938687222284310';
 
 function timeMessage(client){
-
     cron.schedule('0 0 * * *', () => {
         const random = Math.floor( Math.random() * 10 )
         switch (random) {

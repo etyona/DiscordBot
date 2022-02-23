@@ -20,19 +20,27 @@ function command(client) {
         }
         if (command === 'yts'){
             const [text] = args
-            //引数が無ければ入力させる
             if(!text){
                 message.channel.send('引数を入力してください')
+                return
             }
+            message.channel.sendTyping()
             const yts = require('yt-search')
             yts(text, function (err, r) {
-                const videos = r.videos
-                const channels = r.channels
-                const views = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(videos[0].views))
-                const subCount = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(channels[0].subCount))
-                message.channel.send(videos[0].url)
-                message.channel.send(views+' 回視聴')
-                message.channel.send(subCount+'登録者')
+                if(!r) {
+                    message.channel.send('検索に失敗しました')
+                    return
+                }
+                const video = r.videos[0]
+                const channelName = r.videos[0].author.name
+                //1つ目の動画のチャンネル名で検索
+                yts(channelName, function (err, c){
+                    const views = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(video.views))
+                    const subCount = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(c.channels[0].subCount))
+                    message.channel.send(video.url)
+                    message.channel.send(views+' 回視聴')
+                    message.channel.send(channelName + ' / '+'登録者 '+subCount)
+                })
             })
         }
         if (command === 'roulet') {

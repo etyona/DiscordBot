@@ -36,8 +36,14 @@ function command(client) {
             yts(text, function (err, r) {
                 const video = r.videos[0]
                 const channelName = r.videos[0].author.name //動画のチャンネル名
+                console.log(channelName)
                 //動画のチャンネル名で検索、チャンネル情報を取得
                 yts(channelName, function (err, c){
+                    if(!c){
+                        message.channel.send(video.url)
+                        message.channel.send('チャンネル情報が取得できませんでした')
+                        return  //チャンネル情報の取得に失敗した場合
+                    }
                     const views = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(video.views))
                     const subCount = new Intl.NumberFormat("ja-JP",{ notation: "compact"}).format(BigInt(c.channels[0].subCount))
                     message.channel.send(video.url)

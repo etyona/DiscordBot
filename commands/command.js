@@ -1,7 +1,7 @@
 //コマンドメイン処理
 
 //コマンド名一覧 !help で使用
-cmdArray = ['add A B', 'roulet', 'team'];
+cmdArray = ['roulet', 'yts'];
 
 const prefix = '!'
 function command(client) {
@@ -18,6 +18,21 @@ function command(client) {
         if (command === 'add') {
             const [a, b] = args.map(str => Number(str))
             message.channel.send(`${a} + ${b} = ${a + b}`)
+        }
+        if (command === 'yts'){
+            const [text] = args
+            //引数が無ければ入力させる
+            if(!text){
+                message.channel.send('何を検索しますか？ やめる/quit')
+                const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 })
+                const text = collected.first()
+                if(text === 'quit'){return}
+            }
+            const yts = require('yt-search')
+            yts(text, function (err, r) {
+                const videos = r.videos
+                message.channel.send(videos[ 0 ].url )
+            })
         }
         if (command === 'roulet') {
             message.channel.send('入力した数の要素を持つルーレットを作成します  やめる/quit')

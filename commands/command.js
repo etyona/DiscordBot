@@ -22,6 +22,12 @@ function command(client) {
             const [a, b] = args.map(str => Number(str))
             message.channel.send(`${a} + ${b} = ${a + b}`)
         }
+        if (command === 'vsens') {
+            const [a, b] = args.map(str => Number(str))
+            const edpi = a*b
+            const length = 6531.2 / edpi
+            message.channel.send('振り向き:' + length.toFixed(1) + 'cm')
+        }
         //!yts 引数 
         //Youtube検索　検索結果のトップ動画のURLと視聴回数、登録者を表示
         if (command === 'yts'){

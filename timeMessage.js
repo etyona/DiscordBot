@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const channelid = '475938687222284310';
+const channelid = '948217232822005881';
 
 function timeMessage(client){
     cron.schedule('0 0 * * *', () => {

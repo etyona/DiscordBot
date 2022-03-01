@@ -5,7 +5,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 const talk = require('./talk.js');
 const timeMessage = require('./timeMessage.js');
-const commands = require('./commands/command.js');
+const commands = require('./command.js');
 
 // discord BOTトークン 環境変数から取得
 require('dotenv').config();

@@ -1,4 +1,6 @@
 # DiscordBot
+
+https://discord.com/api/oauth2/authorize?client_id=945233149141581835&permissions=8&scope=bot
  
 以下のコマンドを実行するDiscordBot
 

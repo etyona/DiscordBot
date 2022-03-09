@@ -1,5 +1,5 @@
 //コマンド名一覧 !help で使用
-cmdArray = ['github', 'roulet', 'yts 検索内容'];
+cmdArray = ['github', 'roulet', 'yts 検索内容', 'vsens DPI 感度'];
 
 //コマンドメイン処理
 const prefix = '!'

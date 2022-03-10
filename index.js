@@ -23,7 +23,7 @@ commands(client);
 timeMessage(client);
 
 //特定のメッセージに反応
-talk(client);
+// talk(client);
 
 // Discordへの接続
 client.login(token);

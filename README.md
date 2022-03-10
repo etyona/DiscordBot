@@ -8,4 +8,4 @@ https://discord.com/api/oauth2/authorize?client_id=945233149141581835&permission
 
 !yts 検索内容　⇒　YouTube検索を行いURL、再生数、チャンネル名、登録者を返すコマンド
 
-!vsens DPI 感度　⇒　マウスのDPIとゲーム内感度から、FPSゲームValorantの振り向き距離(cm)を計算するコマンド
+!vsens DPI 感度　⇒　マウスDPIとゲーム内感度から、対戦ゲームValorantの振り向き距離(cm)を計算するコマンド
